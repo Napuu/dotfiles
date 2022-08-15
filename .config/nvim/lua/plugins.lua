@@ -30,5 +30,16 @@ return require('packer').startup(function()
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
-    use 'neovim/nvim-lspconfig'
+  use 'neovim/nvim-lspconfig'
+
+
+  use 'Olical/conjure'
+  use 'Olical/aniseed'
+
+  use 'guns/vim-sexp'
+  use 'tpope/vim-sexp-mappings-for-regular-people'
+  use 'luochen1990/rainbow'
+
+  use 'xolox/vim-misc'
+  use 'xolox/vim-notes'
 end)
