@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.o.shiftwidth = 2
 -- vim.g.localleader = ","
 vim.opt.rnu = true
 require'plugins'
