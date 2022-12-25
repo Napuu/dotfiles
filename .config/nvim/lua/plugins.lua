@@ -1,3 +1,13 @@
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  vim.cmd [[packadd packer.nvim]]
+end
+
+-- nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+-- vim.cmd [[packadd packer.nvim]]
+-- sometimes running :packadd packer.nvim is needed
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -5,7 +15,8 @@ vim.cmd([[
   augroup end
 ]])
 
-return require('packer').startup(function()
+
+return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -35,6 +46,7 @@ return require('packer').startup(function()
 
   use 'Olical/conjure'
   use 'Olical/aniseed'
+  use 'terryma/vim-expand-region'
 
   use 'guns/vim-sexp'
   use 'tpope/vim-sexp-mappings-for-regular-people'
@@ -46,4 +58,7 @@ return require('packer').startup(function()
   use 'wfxr/minimap.vim'
   use 'shaunsingh/solarized.nvim'
   use 'marko-cerovac/material.nvim'
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
