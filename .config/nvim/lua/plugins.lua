@@ -42,4 +42,8 @@ return require('packer').startup(function()
 
   use 'xolox/vim-misc'
   use 'xolox/vim-notes'
+
+  use 'wfxr/minimap.vim'
+  use 'shaunsingh/solarized.nvim'
+  use 'marko-cerovac/material.nvim'
 end)
