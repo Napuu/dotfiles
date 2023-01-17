@@ -1,64 +1,70 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd [[packadd packer.nvim]]
-end
 
--- nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
--- vim.cmd [[packadd packer.nvim]]
--- sometimes running :packadd packer.nvim is needed
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
+-- packer installation
+--[[
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  ]]--
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- git plugin
   use 'tpope/vim-fugitive'
-
+  -- git diff at gutter
+  use 'airblade/vim-gitgutter'
+  -- cs'" = 'test' -> "test" etc.
   use 'tpope/vim-surround'
-
+  -- gcc to comment selection, gcgc to uncomment
   use 'tpope/vim-commentary'
 
+  -- sensible defaults and stuff
+  use 'tpope/vim-sensible'
+  -- adjust shift options accordingly
+  use 'tpope/vim-sleuth'
+
+  -- two character s
+  use 'justinmk/vim-sneak'
+
+  -- reusing terminals
+  use 'kassio/neoterm'
+  
+  -- navigation between files, make sure 'fzf', 'bat' and 'git-delta' are installed (with brew)
+  use 'junegunn/fzf'
+  use 'junegunn/fzf.vim'
+
+
+  -- nim support
+  use 'zah/nim.vim'
+
+  --lsp stuff
   use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
   }
-  use 'nvim-treesitter/nvim-treesitter'
+  -- lsp status at bar
+  use 'nvim-lua/lsp-status.nvim'
+
+  --completion stuff
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp-signature-help'
+
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
 
+  --colo
+  use 'ellisonleao/gruvbox.nvim'
+
+  --statusline
   use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-  use 'neovim/nvim-lspconfig'
-
-
-  use 'Olical/conjure'
-  use 'Olical/aniseed'
-  use 'terryma/vim-expand-region'
-
-  use 'guns/vim-sexp'
-  use 'tpope/vim-sexp-mappings-for-regular-people'
-  use 'luochen1990/rainbow'
-
-  use 'xolox/vim-misc'
-  use 'xolox/vim-notes'
-
-  use 'wfxr/minimap.vim'
-  use 'shaunsingh/solarized.nvim'
-  use 'marko-cerovac/material.nvim'
-  if packer_bootstrap then
-    require('packer').sync()
-  end
 end)
