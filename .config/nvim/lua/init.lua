@@ -21,12 +21,16 @@ api.nvim_set_keymap('n', '<leader>w', '<C-w>', { noremap = true})
 api.nvim_set_keymap('t', '<leader>w<Esc>', '<C-\\><C-n>', { noremap = true })
 
 -- terminal always in insert mode
+-- NOTE - this worked, but was kinda annoying at least
+-- with arvaus stuff
+--[[
 api.nvim_create_autocmd(
   {'BufEnter', 'TermOpen'},
   { pattern = '*', command = "if &buftype == 'terminal' | :startinsert | endif" })
 api.nvim_create_autocmd(
   {'BufEnter', 'TermOpen'},
   { pattern = '*', command = ":let leader=','" })
+]]--
 
 -- disable relative rownumbers in terminal
 api.nvim_create_autocmd('TermOpen',{ pattern = '*', command = ":set nornu nonu" })
