@@ -19,6 +19,10 @@ vim.opt.rnu = true
 api.nvim_set_keymap('n', '<leader>w', '<C-w>', { noremap = true})
 -- escaping from terminal is a bit easier
 api.nvim_set_keymap('t', '<leader>w<Esc>', '<C-\\><C-n>', { noremap = true })
+-- allow certain commands to run directly without manual escape
+api.nvim_set_keymap('t', 'gt', '<C-\\><C-n>:tabprevious<CR>', { noremap = true })
+api.nvim_set_keymap('t', '<leader>wv', '<C-\\><C-n>:vsplit<CR>', { noremap = true })
+api.nvim_set_keymap('t', '<leader>wh', '<C-\\><C-n>:split<CR>', { noremap = true })
 
 -- terminal always in insert mode
 -- NOTE - this worked, but was kinda annoying at least
