@@ -22,7 +22,11 @@ api.nvim_set_keymap('t', '<leader>w<Esc>', '<C-\\><C-n>', { noremap = true })
 -- allow certain commands to run directly without manual escape
 api.nvim_set_keymap('t', 'gt', '<C-\\><C-n>:tabprevious<CR>', { noremap = true })
 api.nvim_set_keymap('t', '<leader>wv', '<C-\\><C-n>:vsplit<CR>', { noremap = true })
-api.nvim_set_keymap('t', '<leader>wh', '<C-\\><C-n>:split<CR>', { noremap = true })
+api.nvim_set_keymap('t', '<leader>ws', '<C-\\><C-n>:split<CR>', { noremap = true })
+
+-- this needs fish function 'repeat_previous_command' to be defined
+-- also might need to think about which terminal commands are sent to
+api.nvim_set_keymap('n', '<leader>tr', ':T repeat_previous_command<CR>', { noremap = true})
 
 -- terminal always in insert mode
 -- NOTE - this worked, but was kinda annoying at least
