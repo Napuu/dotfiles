@@ -57,6 +57,16 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
 
+  --file explorer at left side
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons'
+    }
+  }
+
+  --git blame on line
+  use 'f-person/git-blame.nvim'
 
   --colo
   use 'ellisonleao/gruvbox.nvim'

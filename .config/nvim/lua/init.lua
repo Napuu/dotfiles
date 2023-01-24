@@ -201,3 +201,41 @@ cmp.setup.cmdline(':', {
   --require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
   --  capabilities = capabilities
   --}
+  --
+-- tree stuff
+vim.opt.termguicolors = true
+
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  update_focused_file = {
+    enable = true
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = false,
+    show_on_open_dirs = true,
+    debounce_delay = 50,
+    severity = {
+      min = vim.diagnostic.severity.HINT,
+      max = vim.diagnostic.severity.ERROR,
+    },
+  },
+  view = {
+    adaptive_size = true,
+    --mappings = {
+    --  list = {
+    --    { key = "u", action = "dir_up" },
+    --  },
+    --},
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+-- api.nvim_create_autocmd('BufEnter',{ pattern = '*', command = ":NvimTreeFindFile" })
+-- api.nvim_create_autocmd(
+--   {'BufEnter'},
+--   { pattern = '*', command = "if &buftype == '' | :NvimTreeFindFile | endif" })
