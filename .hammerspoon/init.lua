@@ -19,3 +19,12 @@ if caffeine then
     caffeine:setClickCallback(caffeineClicked)
     setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
 end
+
+function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+if file_exists('client.lua') then
+    require('client')
+end
