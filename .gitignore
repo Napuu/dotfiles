@@ -12,3 +12,4 @@
 
 !.hammerspoon
 !.hammerspoon/*
+.hammerspoon/client.lua
