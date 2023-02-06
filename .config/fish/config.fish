@@ -19,3 +19,4 @@ source ~/.iterm2_shell_integration.fish
 
 nvm use 19 > /dev/null
 
+set -ga fish_user_paths /Users/santeri/.nimble/bin

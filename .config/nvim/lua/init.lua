@@ -59,16 +59,24 @@ api.nvim_set_keymap('n', '<leader>gf', ':GFiles<CR>', { noremap = true })
 api.nvim_set_keymap('n', '<leader>bl', ':BLines<CR>', { noremap = true })
 
 --lualine setup
-require('lualine').setup()
+-- require('lualine').setup()
+--
+require('lualine').setup {
+  options = {
+    globalstatus = false
+  }
+}
+o.laststatus=3
 
 -- automatic lsp installation
 require("mason").setup()
 require("mason-lspconfig").setup({
   -- nim requires
   -- nimble install nimlsp
-  ensure_installed = { "tsserver", "eslint", "clojure_lsp", "nimls" }
+  ensure_installed = { "tsserver", "eslint", "clojure_lsp", "nimls", "cssls" }
 })
 
+local navic = require("nvim-navic")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_status = require('lsp-status')
 -- setting up actual lsp's
@@ -90,6 +98,10 @@ require("mason-lspconfig").setup_handlers {
         end
 
         vim.keymap.set('n', '<leader>qf', quickfix, opts)
+
+        if client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
+        end
         
         --asdf
         lsp_status.on_attach(client)
@@ -117,6 +129,7 @@ require("mason-lspconfig").setup_handlers {
   end
 }
 
+o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 g.lsp_log_verbose = 1
 g.lsp_log_file = '/tmp/vim-lsp.log'
 

@@ -77,4 +77,8 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
+  --breadcrumbs/context of where we are inside file
+  --use "wellle/context.vim"
+  use "SmiteshP/nvim-navic"
+
 end)
