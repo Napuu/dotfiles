@@ -32,5 +32,5 @@ set updatetime=100
 "   tnoremap <expr> <c-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 " endif
 
-# todo - move this to some lua file
+" todo - move this to some lua file
 set laststatus=3
