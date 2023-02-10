@@ -81,4 +81,9 @@ return require('packer').startup(function(use)
   --use "wellle/context.vim"
   use "SmiteshP/nvim-navic"
 
+  --sexp stuff
+  use 'guns/vim-sexp'
+  use 'tpope/vim-sexp-mappings-for-regular-people'
+  use 'tpope/vim-repeat'
+
 end)
