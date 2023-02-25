@@ -86,4 +86,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-sexp-mappings-for-regular-people'
   use 'tpope/vim-repeat'
 
+  --automatic pairs
+  use 'steelsojka/pears.nvim'
+
 end)

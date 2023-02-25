@@ -17,6 +17,7 @@ vim.opt.rnu = true
 
 -- allow leader + w for window navigation
 api.nvim_set_keymap('n', '<leader>w', '<C-w>', { noremap = true})
+api.nvim_set_keymap('n', '<leader>wt', ':NvimTreeFocus<CR>', { noremap = true})
 -- escaping from terminal is a bit easier
 api.nvim_set_keymap('t', '<leader>w<Esc>', '<C-\\><C-n>', { noremap = true })
 -- allow certain commands to run directly without manual escape
@@ -26,7 +27,7 @@ api.nvim_set_keymap('t', '<leader>ws', '<C-\\><C-n>:split<CR>', { noremap = true
 
 -- this needs fish function 'repeat_previous_command' to be defined
 -- also might need to think about which terminal commands are sent to
-api.nvim_set_keymap('n', '<leader>tr', ':T repeat_previous_command<CR>', { noremap = true})
+api.nvim_set_keymap('n', '<leader>tr', ':Tkill<CR>:T repeat_previous_command<CR>', { noremap = true})
 
 -- terminal always in insert mode
 -- NOTE - this worked, but was kinda annoying at least
@@ -248,6 +249,8 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+require "pears".setup()
 -- api.nvim_create_autocmd('BufEnter',{ pattern = '*', command = ":NvimTreeFindFile" })
 -- api.nvim_create_autocmd(
 --   {'BufEnter'},
