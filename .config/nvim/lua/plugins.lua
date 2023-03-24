@@ -9,8 +9,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- git plugin
+  -- git plugins
   use 'tpope/vim-fugitive'
+  use 'shumphrey/fugitive-gitlab.vim'
   -- git diff at gutter
   use 'airblade/vim-gitgutter'
   -- cs'" = 'test' -> "test" etc.
