@@ -293,3 +293,6 @@ vim.cmd [[
 ]]
 
 local success, confidential = pcall(require, 'confidential')
+if success then
+  require'confidential'
+end
