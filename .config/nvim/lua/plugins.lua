@@ -54,9 +54,28 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
+  use 'onsails/lspkind-nvim'
 
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
+
+  use 'nvim-tree/nvim-web-devicons'
+  use 'nvim-treesitter/nvim-treesitter'
+
+  use({
+    "glepnir/lspsaga.nvim",
+    opt = true,
+    branch = "main",
+    event = "LspAttach",
+    config = function()
+        require("lspsaga").setup({})
+    end,
+    requires = {
+        {"nvim-tree/nvim-web-devicons"},
+        --Please make sure you install markdown and markdown_inline parser
+        {"nvim-treesitter/nvim-treesitter"}
+    }
+  })
 
   --file explorer at left side
   use {
@@ -87,7 +106,10 @@ return require('packer').startup(function(use)
   use 'tpope/vim-sexp-mappings-for-regular-people'
   use 'tpope/vim-repeat'
 
-  --automatic pairs
-  use 'steelsojka/pears.nvim'
+  use {
+    "windwp/nvim-autopairs",
+    config = require("nvim-autopairs").setup()
+  }
 
+  use 'luochen1990/rainbow'
 end)
