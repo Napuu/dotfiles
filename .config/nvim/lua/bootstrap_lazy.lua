@@ -20,7 +20,9 @@ require("lazy").setup({
   "folke/neodev.nvim", -- helps with lua dev
 
   "nvim-lua/plenary.nvim", -- helper lua functions
-  "nvim-telescope/telescope.nvim", -- fzf-like
+  "junegunn/fzf",
+  "junegunn/fzf.vim",
+  "kevinhwang91/nvim-bqf",
 
   {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}, -- highlighting
 
@@ -33,13 +35,16 @@ require("lazy").setup({
   -- "justinmk/vim-sneak", -- two character s
 
   "airblade/vim-gitgutter",
-  "TimUntersberger/neogit",
+  "tpope/vim-fugitive",
+  "shumphrey/fugitive-gitlab.vim",
   "sindrets/diffview.nvim",
   "f-person/git-blame.nvim",
   "kdheepak/lazygit.nvim",
 
   "nvim-lualine/lualine.nvim",
   "nvim-tree/nvim-web-devicons",
+
+  "kassio/neoterm",
 
   --  curl -L https://nixos.org/nix/install | sh
   "dundalek/lazy-lsp.nvim",

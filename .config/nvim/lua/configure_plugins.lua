@@ -1,13 +1,53 @@
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>ag', function()
-  builtin.live_grep({grep_open_files=false})
-end, {})
-vim.keymap.set('n', '<leader>fb', function()
-  builtin.buffers({ sort_mru = true })
-end, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+-- local builtin = require('telescope.builtin')
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+-- vim.keymap.set('n', '<leader>ag', function()
+--   builtin.live_grep({grep_open_files=false})
+-- end, {})
+-- vim.keymap.set('n', '<leader>fb', function()
+--   builtin.buffers({ sort_mru = true })
+-- end, {})
+-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+-- vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+
+-- local actions = require('telescope.actions')
+-- require('telescope').setup{
+--   defaults = {
+--     mappings = {
+--       i = {
+--         ["<C-w>"] = actions.send_selected_to_qflist,
+--         ["<C-q>"] = actions.send_to_qflist,
+--       },
+--       n = {
+--         ["<C-w>"] = actions.send_selected_to_qflist,
+--         ["<C-q>"] = actions.send_to_qflist,
+--       },
+--     },
+--   }
+-- }
+
+vim.cmd [[
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--disabled', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    let spec = fzf#vim#with_preview(spec, 'right', 'ctrl-/')
+    call fzf#vim#grep(initial_command, 1, spec, a:fullscreen)
+  endfunction
+
+  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+  if has('nvim')
+    tnoremap <expr> <c-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+  endif
+]]
+
+local api = vim.api
+api.nvim_set_keymap('n', '<leader>fb', ':Buffers<CR>', { noremap = true, nowait = true })
+api.nvim_set_keymap('n', '<leader>ag', ':RG<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>fag', ':Rg<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>ff', ':Files<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>gf', ':GFiles<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>bl', ':BLines<CR>', { noremap = true })
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -15,12 +55,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('lualine').setup()
-
-require("neogit").setup {
-  integrations = {
-    diffview = true
-  },
-}
 
 require('lazy-lsp').setup {
   excluded_servers = {
@@ -87,4 +121,8 @@ vim.cmd [[
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 
-vim.cmd 'command! G Neogit'
+local success, confidential = pcall(require, 'confidential')
+if success then
+  require'confidential'
+end
+
