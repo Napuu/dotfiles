@@ -73,4 +73,9 @@ require("lazy").setup({
 
   'hrsh7th/cmp-vsnip',
   'hrsh7th/vim-vsnip',
+
+
+  --breadcrumbs/context of where we are inside file
+  'SmiteshP/nvim-navic',
+
 })
