@@ -10,3 +10,4 @@ vim.api.nvim_set_keymap('t', 'gt', '<C-\\><C-n>:tabprevious<CR>', { noremap = tr
 vim.api.nvim_set_keymap('t', '<leader>wv', '<C-\\><C-n>:vsplit<CR>', { noremap = true })
 vim.api.nvim_set_keymap('t', '<leader>ws', '<C-\\><C-n>:split<CR>', { noremap = true })
 
+vim.api.nvim_set_keymap('n', '<leader>tr', ':Tkill<CR>:T repeat_previous_command<CR>', { noremap = true })
