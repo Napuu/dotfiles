@@ -13,3 +13,6 @@
 !.hammerspoon
 !.hammerspoon/*
 .hammerspoon/client.lua
+
+!.bin
+!.bin/*
